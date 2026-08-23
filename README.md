@@ -283,7 +283,7 @@ Python 3.9 or higher
 
 ```bash
 git clone https://github.com/Akashhorambe/SurfaceMap.git
-cd Surfacemap
+cd SurfacMmap
 ```
 
 ### 2. Create a virtual environment
