@@ -1,4 +1,3 @@
-```markdown
 # Seeker - Multi-Source Reconnaissance Tool
 
 Seeker is a Python-based reconnaissance tool built for learning VAPT, bug bounty workflows, and penetration testing fundamentals.
