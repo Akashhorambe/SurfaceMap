@@ -1,0 +1,4 @@
+aiohttp
+dnspython
+beautifulsoup4
+rich
