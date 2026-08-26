@@ -1,5 +1,5 @@
 # ==========================================
-# Project Name : SurfaceMap
+# Project Name : Seeker
 # Purpose      : Recon tool for VAPT / Bug Bounty learning
 # Author       : Akash Horambe
 # ==========================================
@@ -793,7 +793,7 @@ class SubdomainFinder:
         sublist3r_cmd = None
 
         if self.sublist3r_path and os.path.isfile(self.sublist3r_path):
-            sublist3r_output = Path(tempfile.gettempdir()) / f"surfacemap_sublist3r_{self.domain.replace('.', '_')}.txt"
+            sublist3r_output = Path(tempfile.gettempdir()) / f"seeker_sublist3r_{self.domain.replace('.', '_')}.txt"
             sublist3r_cmd = [
                 sys.executable,
                 self.sublist3r_path,
@@ -804,7 +804,7 @@ class SubdomainFinder:
             ]
 
         elif shutil.which("sublist3r"):
-            sublist3r_output = Path(tempfile.gettempdir()) / f"surfacemap_sublist3r_{self.domain.replace('.', '_')}.txt"
+            sublist3r_output = Path(tempfile.gettempdir()) / f"seeker_sublist3r_{self.domain.replace('.', '_')}.txt"
             sublist3r_cmd = [
                 "sublist3r",
                 "-d",
@@ -1310,7 +1310,7 @@ class DirFuzzer:
 # MAIN APPLICATION
 # ----------------------------------------
 
-class SurfaceMapApp:
+class seekerApp:
     def __init__(self, targets, output_dir, output_format, wordlist, features, sublist3r_path, base_filename):
         self.targets = targets
         self.output_dir = output_dir
@@ -1321,7 +1321,7 @@ class SurfaceMapApp:
         self.base_filename = base_filename
 
         self.results = {
-            "tool": "SurfaceMap",
+            "tool": "seeker",
             "scan_time": datetime.now().isoformat(),
             "features": self.features,
             "targets": {}
@@ -1334,7 +1334,7 @@ class SurfaceMapApp:
         # ssl=False avoids certificate errors for recon
         connector = aiohttp.TCPConnector(ssl=False)
 
-        async with aiohttp.ClientSession(connector=connector, headers={"User-Agent": "SurfaceMap/1.0"}) as session:
+        async with aiohttp.ClientSession(connector=connector, headers={"User-Agent": "seeker/1.0"}) as session:
 
             # create objects only if feature is enabled
             dir_fuzzer = DirFuzzer(session, self.wordlist) if self.features["dir_fuzz"] else None
@@ -1550,7 +1550,7 @@ class SurfaceMapApp:
 
     # display output on terminal
     def show_report(self):
-        console.print("\n[bold magenta]=== SURFACEMAP FINAL REPORT ===[/bold magenta]\n")
+        console.print("\n[bold magenta]=== seeker FINAL REPORT ===[/bold magenta]\n")
 
         if not self.results["targets"]:
             console.print("[yellow]No targets scanned.[/yellow]")
@@ -1936,7 +1936,7 @@ class SurfaceMapApp:
 # ----------------------------------------
 
 def start_interactive_mode(args):
-    console.print("[bold cyan]>> SurfaceMap Interactive Mode Started[/bold cyan]\n")
+    console.print("[bold cyan]>> seeker Interactive Mode Started[/bold cyan]\n")
 
     # target input
     if args.target:
@@ -2092,7 +2092,7 @@ def start_interactive_mode(args):
 def main():
     console.print(BANNER)
 
-    parser = argparse.ArgumentParser(prog="surfacemap.py", description="SurfaceMap - Multi-Source Recon Tool")
+    parser = argparse.ArgumentParser(prog="seeker.py", description="seeker - Multi-Source Recon Tool")
     parser.add_argument("-t", "--target", help="Target domain, IP, CIDR, or file")
     parser.add_argument("--wordlist", help="Directory fuzzing wordlist path")
     parser.add_argument("--sublist3r", help="Path to Sublist3R.py")
@@ -2111,7 +2111,7 @@ def main():
         safe_target = target.replace("/", "_").replace("\\", "_").replace(":", "_")
 
     safe_target = safe_target.strip(".") or "target"
-    base_filename = f"surfacemap_{safe_target}_{run_id}"
+    base_filename = f"seeker_{safe_target}_{run_id}"
 
     if output_format != "screen":
         output_dir = Path("scan_results")
@@ -2125,7 +2125,7 @@ def main():
         output_dir = None
         console.print("\n[bold yellow]✔ Output will be displayed on screen only.[/bold yellow]")
 
-    app = SurfaceMapApp(
+    app = seekerApp(
         targets=targets,
         output_dir=str(output_dir) if output_dir else None,
         output_format=output_format,
