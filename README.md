@@ -282,8 +282,8 @@ Python 3.9 or higher
 ### 1. Clone or download the repository
 
 ```bash
-git clone https://github.com/Akashhorambe/SurfaceMap.git
-cd SurfacMmap
+git clone https://github.com/Akashhorambe/Seeker.git
+cd Seeker
 ```
 
 ### 2. Create a virtual environment
@@ -320,7 +320,7 @@ rich
 ### 4. Run the tool
 
 ```bash
-python surfacemap.py
+python seeker.py
 ```
 
 ---
@@ -330,7 +330,7 @@ python surfacemap.py
 Run:
 
 ```bash
-python surfacemap.py
+python seeker.py
 ```
 
 Example prompts:
@@ -365,15 +365,15 @@ Enable subdomain takeover detection? [Y/n]:
 Seeker is fully interactive, but some options can be prefilled.
 
 ```bash
-python surfacemap.py -t example.com -o json
+python seeker.py -t example.com -o json
 ```
 
 ```bash
-python surfacemap.py -t example.com --wordlist /usr/share/wordlists/dirb/common.txt -o csv
+python seeker.py -t example.com --wordlist /usr/share/wordlists/dirb/common.txt -o csv
 ```
 
 ```bash
-python surfacemap.py -t targets.txt -o screen
+python seeker.py -t targets.txt -o screen
 ```
 
 Available options:
@@ -410,7 +410,7 @@ If output format is `screen`, no file is saved.
 
 ```
 seeker/
-├── surfacemap.py
+├── seeker.py
 ├── requirements.txt
 ├── README.md
 └── scan_results/
